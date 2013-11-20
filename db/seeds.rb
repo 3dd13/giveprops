@@ -26,17 +26,25 @@ users = User.create([{
 	email: 'oarnett@oa.com'
 }])
 
-profession = Profession.create({
-	title: "web developer"
-	})
+professions = Profession.create([{
+		title: "web developer"
+	},
+	{
+		title: 'Actor'
+	}])
 
-props = Props.create([{
+props = Prop.create([{
 		rating: '5',
-		profession: profession,
+		profession: professions[0],
+		user: users[0]
+	},
+	{
+		rating: '0',
+		profession: professions[1],
 		user: users[0]
 	},
 	{
 	  rating: '1',
-		profession: profession,
+		profession: professions[0],
 		user: users[1]
 	}])

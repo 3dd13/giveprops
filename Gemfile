@@ -38,6 +38,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'puma'
 gem 'rabl'
 gem 'oj'
+gem 'devise'
 
 # Use unicorn as the app server
 # gem 'unicorn'

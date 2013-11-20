@@ -1,0 +1,3 @@
+collection @countries
+
+attributes :name

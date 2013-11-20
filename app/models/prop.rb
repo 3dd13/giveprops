@@ -1,4 +1,5 @@
-class Props < ActiveRecord::Base
+class Prop < ActiveRecord::Base
   belongs_to :user
   belongs_to :profession
+
 end

@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require ./vendor/bootstrap
 //= require ./vendor/handlebars
+//= require ./vendor/jquery.noty
+//= require ./vendor/themes/default
+//= require ./vendor/layouts/top
+//= require ./vendor/layouts/topRight
