@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118081942) do
+ActiveRecord::Schema.define(version: 20131120092503) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20131118081942) do
   end
 
   create_table "props", force: true do |t|
-    t.string   "rating"
+    t.string   "rating",        default: "0"
     t.integer  "user_id"
     t.integer  "profession_id"
     t.datetime "created_at"
@@ -58,16 +58,27 @@ ActiveRecord::Schema.define(version: 20131118081942) do
     t.string   "name"
     t.string   "profile_name"
     t.string   "gender"
-    t.string   "email"
-    t.string   "salt"
-    t.string   "fish"
-    t.string   "code"
-    t.datetime "expires_at"
     t.integer  "city_id"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "users", ["city_id"], name: "index_users_on_city_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

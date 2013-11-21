@@ -16,14 +16,12 @@ city = City.create({
 users = User.create([{
   name: "Emily",
   city: city,
-  gender: "f",
-  email: 'emarnett@ea.com'
+  gender: "f"
 },
 { 
 	name: "Oliver",
 	city: city,
-	gender: 'm',
-	email: 'oarnett@oa.com'
+	gender: 'm'
 }])
 
 professions = Profession.create([{

@@ -4,8 +4,24 @@
   	<h1>Give Props.</h1>
   </div>
   <div class="jumbotron jumbo-white">
-  	<button type="submit" id="register-btn" class="btn btn-lg">Register Now</button>
-  	<p>or search our lists:</p>
+  	<% unless current_user %>
+  	<button class="btn btn-lg" id="register-btn">Register Now</button>
+  	<div id="register-form">
+	  	<%= form_for("user", :url => user_registration_path) do |f| %>	
+			  <div><%= f.label :email %><br />
+			  <%= f.email_field :email, :autofocus => true %></div>
+
+			  <div><%= f.label :password %><br />
+			  <%= f.password_field :password %></div>
+
+			  <div><%= f.label :password_confirmation %><br />
+			  <%= f.password_field :password_confirmation %></div>
+
+			  <div><%= f.submit "Sign up" %></div>
+			<% end %>
+		</div>
+
+  	<p>or <% end %>search our lists:</p>
   	<form class="form-inline" role="form">
 		  <div class="form-group">
 		  	<label>Choose a Profession...</label>

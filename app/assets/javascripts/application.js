@@ -18,3 +18,4 @@
 //= require ./vendor/themes/default
 //= require ./vendor/layouts/top
 //= require ./vendor/layouts/topRight
+//= require_tree .

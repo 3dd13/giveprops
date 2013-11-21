@@ -40,6 +40,11 @@ body {
 	color: #4B0082;
 }
 
+.jumbotron h2 {
+  color: #4B0082;
+  font-size: 40px;
+}
+
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
 color: #4B0082;
 }
