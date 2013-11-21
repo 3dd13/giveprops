@@ -13,7 +13,7 @@ Giveprops::Application.routes.draw do
     get '/confirm' => 'devise/confirmations#show', as: :confirm
   end
 
-
+ scope :api do
   resources :users, defaults: { format: :json } do
   	resources :props, defaults: { format: :json }
   end
@@ -23,7 +23,10 @@ Giveprops::Application.routes.draw do
   end
 
   resources :countries, defaults: { format: :json }
-  resources :cities, defaults: { format: :json }
+  
+  resources :cities, defaults: { format: :json } do
+    resources :users, defaults: { format: :json } 
+  end
 
   resources :countries, defaults: { format: :json } do
     resources :cities, defaults: { format: :json } do
@@ -32,7 +35,10 @@ Giveprops::Application.routes.draw do
   end
 
   resources :props, defaults: { format: :json }
-
+end
+  
+  get '/:profile_name' => 'profile#show', as: :profile
+  
   resources :site
 
   root 'site#index'

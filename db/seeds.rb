@@ -1,7 +1,6 @@
 User.destroy_all
 City.destroy_all
 Country.destroy_all
-City.destroy_all
 Profession.destroy_all
 
 country = Country.create({
@@ -13,16 +12,16 @@ city = City.create({
   country: country
 })
 
-users = User.create([{
+user = User.create!({
   name: "Emily",
   city: city,
-  gender: "f"
-},
-{ 
-	name: "Oliver",
-	city: city,
-	gender: 'm'
-}])
+  gender: "f",
+  email: 'em@ea.com',
+  password: '12345678',
+  profile_name: 'emily',
+  confirmed_at: Time.now
+
+  })
 
 professions = Profession.create([{
 		title: "web developer"
@@ -34,15 +33,15 @@ professions = Profession.create([{
 props = Prop.create([{
 		rating: '5',
 		profession: professions[0],
-		user: users[0]
+		user: user
 	},
 	{
 		rating: '0',
 		profession: professions[1],
-		user: users[0]
+		user: user
 	},
 	{
 	  rating: '1',
 		profession: professions[0],
-		user: users[1]
+		user: user
 	}])

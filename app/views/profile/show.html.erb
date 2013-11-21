@@ -1,0 +1,56 @@
+<section id="page-content">Hey</section>
+
+<script id="profile-template" type="text/x-handlebars-template">
+  <ul class="profile-link">
+    {{#each current_user}}
+      <li><a href="{{href}}">{{name}}</a></li>
+    {{/each}}
+  </ul>
+</script>
+
+ <script id="vitae-template" type="text/x-handlebars-template">
+//   {{#each this}}
+//     <h2>{{name}}</h2>
+//     <p>{{objective}}</p>
+//     <p class="vitaes-path"><a href="#">All vitaes</a></p>
+//   {{/each}}
+</script>
+
+<script>
+$ ->
+  showVitaes = ->
+    $.ajax
+      url: '/api/vitaes'
+      type: 'GET'
+      data: 'json'
+      success: (data) ->
+        source = $("#vitaes-template").html()
+        template = Handlebars.compile source
+      
+        $('#page-content').html template(data)
+      error: (x,y,z) ->
+        console.log x,y,z
+        
+  showVitae = (href) ->
+    $.ajax
+      url: href
+      type: 'GET'
+      data: 'json'
+      success: (data) ->
+        source = $("#vitae-template").html()
+        template = Handlebars.compile source
+        
+        $('#page-content').html template(data)
+      error: (x,y,z) ->
+        console.log x,y,z
+        
+  $('#page-content').on 'click', 'ul.vitaes-link li a', (e) ->
+    e.preventDefault()
+    showVitae $(@).attr('href')
+  
+  $('#page-content').on 'click', 'p.vitaes-path a', (e) ->
+    e.preventDefault()
+    showVitaes()
+        
+  showVitaes()
+</script>
