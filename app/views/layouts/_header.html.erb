@@ -7,12 +7,13 @@
 		    <span class="icon-bar"></span>
 		    <span class="icon-bar"></span>
 		  </button>
-		  <a class="navbar-brand" href="<%= root_path%>">Give Props</a>
+		  <a class="navbar-brand" href="<%= root_path%>">Props</a>
 		</div>
 		<div class="navbar-collapse collapse pull-right">
       <% if user_signed_in? %> 
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to current_user.profile_name, profile_path(current_user.profile_name) %></li>
+          <li><%= link_to current_user.profile_name.titleize, profile_path(current_user.profile_name) %></li>
+          <li><%= link_to "Search", search_index_path %></li>
           <li><%= link_to "Account", edit_user_registration_path %></li>
           <li><%= link_to "Log Out", logout_path %></li>
         </ul>
@@ -26,6 +27,9 @@
           </div>
           <%= f.submit "Sign in", :class => "btn btn-success" %>
         <% end %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Search", search_index_path %></li>
+        </ul>
       <% end %>
     </div><!--/.navbar-collapse -->
 	</div>

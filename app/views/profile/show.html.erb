@@ -1,56 +1,67 @@
-<section id="page-content">Hey</section>
 
-<script id="profile-template" type="text/x-handlebars-template">
-  <ul class="profile-link">
-    {{#each current_user}}
+  <div class="row">
+    <div class="col-md-3">
+      <div class="bs-sidebar hidden-print" role="complementary">
+        <div class="bs-sidenav users-link">
+          <section id="page-content"></section>
+          <section id="professions-content"></section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script id="users-template" type="text/x-handlebars-template">
+  <ul class="nav users-link">
+    {{#each users}}
       <li><a href="{{href}}">{{name}}</a></li>
     {{/each}}
   </ul>
 </script>
 
- <script id="vitae-template" type="text/x-handlebars-template">
-//   {{#each this}}
-//     <h2>{{name}}</h2>
-//     <p>{{objective}}</p>
-//     <p class="vitaes-path"><a href="#">All vitaes</a></p>
-//   {{/each}}
+<script id="user-template" type="text/x-handlebars-template">
+  <ul class="nav props-link">
+    {{#each props}}
+      <li><a href="{{profession.href}}">{{ profession.title }}</a>: {{ rating }}</li>
+    {{/each}}
+  </ul>
 </script>
 
 <script>
-$ ->
-  showVitaes = ->
-    $.ajax
-      url: '/api/vitaes'
-      type: 'GET'
-      data: 'json'
-      success: (data) ->
-        source = $("#vitaes-template").html()
-        template = Handlebars.compile source
+// $ ->
+//   showVitaes = ->
+//     $.ajax
+//       url: '/api/vitaes'
+//       type: 'GET'
+//       data: 'json'
+//       success: (data) ->
+      //   source = $("#vitaes-template").html()
+      //   template = Handlebars.compile source
       
-        $('#page-content').html template(data)
-      error: (x,y,z) ->
-        console.log x,y,z
+      //   $('#page-content').html template(data)
+      // error: (x,y,z) ->
+      //   console.log x,y,z
         
-  showVitae = (href) ->
-    $.ajax
-      url: href
-      type: 'GET'
-      data: 'json'
-      success: (data) ->
-        source = $("#vitae-template").html()
-        template = Handlebars.compile source
+//   showVitae = (href) ->
+//     $.ajax
+//       url: href
+//       type: 'GET'
+//       data: 'json'
+//       success: (data) ->
+//         source = $("#vitae-template").html()
+//         template = Handlebars.compile source
         
-        $('#page-content').html template(data)
-      error: (x,y,z) ->
-        console.log x,y,z
+//         $('#page-content').html template(data)
+//       error: (x,y,z) ->
+//         console.log x,y,z
         
-  $('#page-content').on 'click', 'ul.vitaes-link li a', (e) ->
-    e.preventDefault()
-    showVitae $(@).attr('href')
+//   $('#page-content').on 'click', 'ul.profile-link li a', (e) ->
+//     e.preventDefault()
+//     showVitae $(@).attr('href')
   
-  $('#page-content').on 'click', 'p.vitaes-path a', (e) ->
-    e.preventDefault()
-    showVitaes()
+//   $('#page-content').on 'click', 'p.vitaes-path a', (e) ->
+//     e.preventDefault()
+//     showVitaes()
         
-  showVitaes()
+//   showVitaes()
 </script>

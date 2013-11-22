@@ -1,26 +1,30 @@
-collection @users
+object nil
 
-attributes :id, :name, :email, :gender, :profile_name
+child @users, object_root: false do
 
-node :href do |user|
-  user_url(user)
-end
+  attributes :id, :name, :email, :gender, :profile_name
 
-child :city do
-  attributes :name
-  node :href do |city|
-  	city_url(city)
-	end
-  child :country do
-  	attributes :name
-  	node :href do |country|
-  		country_url(country)
-		end
+  node :href do |user|
+    user_url(user)
   end
-end
 
-node :linked do |user|
-	{
-		props: user_props_url(user)
-	}
+  child :city do
+    attributes :name
+    node :href do |city|
+    	city_url(city)
+  	end
+    child :country do
+    	attributes :name
+    	node :href do |country|
+    		country_url(country)
+  		end
+    end
+  end
+
+  node :links do |user|
+  	{
+  		props: user_props_url(user)
+  	}
+  end
+
 end

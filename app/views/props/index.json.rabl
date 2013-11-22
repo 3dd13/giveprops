@@ -1,23 +1,27 @@
-collection @props
+object nil
 
-attributes :rating
+child @props, object_root: false do
 
-node :href do |prop|
-  prop_url(prop)
-end
+	attributes :rating
 
-child :profession do
-  attributes :title
-  node :href do |profession|
-		profession_url(profession)
+	node :href do |prop|
+	  prop_url(prop)
 	end
-end
 
-child :user do
-  attributes :name
-  node :href do |user|
-		user_url(user)
+	child :profession do
+	  attributes :title
+	  node :href do |profession|
+			profession_url(profession)
+		end
 	end
+
+	child :user do
+	  attributes :name
+	  node :href do |user|
+			user_url(user)
+		end
+	end
+
 end
 
 

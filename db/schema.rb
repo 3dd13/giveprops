@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131120092503) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cities", force: true do |t|
     t.string   "name"
     t.integer  "country_id"
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20131120092503) do
     t.datetime "updated_at"
   end
 
-  add_index "cities", ["country_id"], name: "index_cities_on_country_id"
+  add_index "cities", ["country_id"], name: "index_cities_on_country_id", using: :btree
 
   create_table "countries", force: true do |t|
     t.string   "name"
@@ -43,16 +46,8 @@ ActiveRecord::Schema.define(version: 20131120092503) do
     t.datetime "updated_at"
   end
 
-  add_index "props", ["profession_id"], name: "index_props_on_profession_id"
-  add_index "props", ["user_id"], name: "index_props_on_user_id"
-
-  create_table "registrants", force: true do |t|
-    t.string   "email"
-    t.string   "code"
-    t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "props", ["profession_id"], name: "index_props_on_profession_id", using: :btree
+  add_index "props", ["user_id"], name: "index_props_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -77,8 +72,8 @@ ActiveRecord::Schema.define(version: 20131120092503) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["city_id"], name: "index_users_on_city_id"
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["city_id"], name: "index_users_on_city_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

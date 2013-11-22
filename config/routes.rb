@@ -40,6 +40,7 @@ end
   get '/:profile_name' => 'profile#show', as: :profile
   
   resources :site
+  resources :search
 
   root 'site#index'
 
