@@ -1,9 +1,8 @@
 Giveprops::Application.routes.draw do
 
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations', registrations: "users/registrations" }
   # devise_for :users
   # devise_for :users, :skip => [:sessions]
-
 
   as :user do
   	get '/register', to: 'devise/registrations#new', as: :register
@@ -36,8 +35,11 @@ Giveprops::Application.routes.draw do
 
   resources :props, defaults: { format: :json }
 end
+
+  get '/search', to: 'search#index', as: :search
   
   get '/:profile_name' => 'profile#show', as: :profile
+  put '/:profile_name' => 'profile#update'
   
   resources :site
   resources :search

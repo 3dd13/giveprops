@@ -13,7 +13,7 @@
       <% if user_signed_in? %> 
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to current_user.profile_name.titleize, profile_path(current_user.profile_name) %></li>
-          <li><%= link_to "Search", search_index_path %></li>
+          <li><%= link_to "Search", search_path %></li>
           <li><%= link_to "Account", edit_user_registration_path %></li>
           <li><%= link_to "Log Out", logout_path %></li>
         </ul>
@@ -28,7 +28,7 @@
           <%= f.submit "Sign in", :class => "btn btn-success" %>
         <% end %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Search", search_index_path %></li>
+          <li><%= link_to "Search", search_path %></li>
         </ul>
       <% end %>
     </div><!--/.navbar-collapse -->

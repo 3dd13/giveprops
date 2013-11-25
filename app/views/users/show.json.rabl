@@ -1,17 +1,20 @@
-collection @users
+object nil
 
-attributes :id, :name, :email, :gender, :profile_name
+child @users, object_root: false do
 
-child :city do
-  attributes :name
-  child :country do
-  	attributes :name
-  end
-end
+	attributes :id, :name, :email, :gender, :profile_name
 
-node :linked do |user|
-	{
-		users: users_url,
-		props: user_props_url(user)
-	}
+	child :city do
+	  attributes :name
+	  child :country do
+	  	attributes :name
+	  end
+	end
+
+	node :linked do |user|
+		{
+			users: users_url,
+			props: user_props_url(user)
+		}
+	end
 end

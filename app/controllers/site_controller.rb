@@ -1,9 +1,8 @@
 class SiteController < ApplicationController
 
   def index
-  end
-
-  def show
+  	@professions = Profession.all
+  	@cities = City.all
   end
 
 end

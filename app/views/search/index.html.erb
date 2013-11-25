@@ -1,0 +1,53 @@
+<div class="jumbotron">
+	<p>search our lists:</p>
+	<%= form_tag search_index_path, method: :get, :class => 'form-inline' do %>	
+	  <div class="form-group">
+	  	<label>Choose a Profession...</label>
+	  	<% if @profession %>
+		  	<%= select_tag 'profession', options_from_collection_for_select(@professions, 'id', 'title', @profession.id), { :class => 'form-control' } %>
+		  <% else %>
+		  	<%= select_tag 'profession', options_from_collection_for_select(@professions, 'id', 'title'), { :class => 'form-control' } %>
+		  <% end %>
+	  </div>
+	  <div class="form-group">
+	  	<label>Choose a Location...</label>
+	  	<% if @city %>
+		  	<%= select_tag 'city', options_from_collection_for_select(@cities, 'id', 'name', @city.id), {include_blank: true, :class => 'form-control'}  %>
+	  	<% else %>
+	  		<%= select_tag 'city', options_from_collection_for_select(@cities, 'id', 'name'), {include_blank: true, :class => 'form-control'}  %>
+	  	<% end %>
+	  </div>
+	  <div class="form-group">
+		  <%= submit_tag "Search" %>
+		</div>
+	<% end %>
+</div>
+<% if params[:profession] %>
+	<div class="jumbotron jumbo-white">
+		<div class="row">	
+			<div class="col-sm-6 col-sm-offset-3">
+				The best <%= @profession.title %>s in 
+				<% if @city %><%= @city.name %>, <%= @city.country.name %>
+				<% else %>the world
+				<% end %>
+			</div>
+		</div>
+		<div class="row">
+			<% @props.each do |p| %>
+				<div class="col-sm-3">
+					<a href="/<%=p.user.profile_name%>" class="user-details">
+						<% if p.user.avatar.thumb.url %>
+		          <%= image_tag p.user.avatar.thumb.url, width: '100%', id:'profile_picture' %>
+		        <% else %>
+		          <%= image_tag 'person.jpg', width: '100%', id:'profile_picture' %>
+		        <% end %>
+						<%= p.user.name %>
+						<%= p.total %>
+					</a>
+				</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+
+

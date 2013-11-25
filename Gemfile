@@ -40,6 +40,12 @@ gem 'rabl'
 gem 'oj'
 gem 'devise'
 gem 'pg'
+gem 'carrierwave'
+gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
+
+group :development, :test do
+	gem 'rspec-rails'
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'

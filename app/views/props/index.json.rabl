@@ -20,6 +20,18 @@ child @props, object_root: false do
 	  node :href do |user|
 			user_url(user)
 		end
+		child :city do
+    attributes :name
+    node :href do |city|
+    	city_url(city)
+  	end
+    child :country do
+    	attributes :name
+    	node :href do |country|
+    		country_url(country)
+  		end
+    end
+  end
 	end
 
 end

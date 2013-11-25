@@ -1,25 +1,69 @@
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="bs-sidebar hidden-print" role="complementary">
-        <div class="bs-sidenav users-link">
-          <section id="page-content"></section>
-          <section id="professions-content"></section>
+<div class="row">
+  <div class="col-sm-3">
+    <div id="editable_profile_picture">
+        <% if @user_profile.avatar.thumb.url %>
+          <%= image_tag @user_profile.avatar.thumb.url, width: '100%', id:'profile_picture' %>
+        <% else %>
+          <%= image_tag 'person.jpg', width: '100%', id:'profile_picture' %>
+        <% end %>
+      <% if @user_profile == current_user %>
+        <div id="edit_image">
+          <a>Edit Profile Picture</a>
         </div>
+        <div id="show_edit_image_form">
+          <%= form_for :user, url: profile_url, html: { role: "form", id:"edit_image_form" }, method: :put do |f| %>
+            <div class="form-group">
+              <%= f.file_field :avatar %>
+              <div class="col-lg-8 no-padding-left no-padding-right">
+                <%= f.submit 'Save Image', class:'btn btn-default', name:'save_avatar' %>
+                <%= f.submit 'Delete Image', class:'btn btn-default', name:'delete_avatar' %>
+              </div>
+              <div class="col-lg-4 no-padding-right no-padding-left">
+                <button class="btn btn-default" id="cancel_edit_image">Cancel</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="bs-sidebar hidden-print" role="complementary">
+      <div class="bs-sidenav users-link">
+        <section id="page-content"></section>
+        <section id="professions-content"></section>
+      </div>
+      <div class="bs-sidenav users-link">
+        <ul class="nav">
+          <li><%= @user_profile.name =%></li>
+          <li><%= @user_profile.city.name %>, <%= @user_profile.city.country.name %></li>
+        </ul>
+        <ul class="nav">
+          <% @props.each do |prop| %>
+          <li><%= prop.profession.title %>: <%= prop.total %> (<%= prop.count %> vote<% if prop.count>1 %>s<% end %>)</li>
+          <% end %>
+        </ul>
+        <script>
+          $(function() {
+            // getUserProfile(<%= @user_profile.id %>);
+          })
+        </script>
       </div>
     </div>
   </div>
+  <div class="col-sm-3">
+  </div>
+</div>
 
 
 <script id="users-template" type="text/x-handlebars-template">
   <ul class="nav users-link">
     {{#each users}}
       <li><a href="{{href}}">{{name}}</a></li>
+      <li>{{ city.name }}, {{ city.country.name }}</li>
     {{/each}}
   </ul>
 </script>
 
-<script id="user-template" type="text/x-handlebars-template">
+<script id="props-template" type="text/x-handlebars-template">
   <ul class="nav props-link">
     {{#each props}}
       <li><a href="{{profession.href}}">{{ profession.title }}</a>: {{ rating }}</li>
@@ -28,40 +72,31 @@
 </script>
 
 <script>
-// $ ->
-//   showVitaes = ->
-//     $.ajax
-//       url: '/api/vitaes'
-//       type: 'GET'
-//       data: 'json'
-//       success: (data) ->
-      //   source = $("#vitaes-template").html()
-      //   template = Handlebars.compile source
-      
-      //   $('#page-content').html template(data)
-      // error: (x,y,z) ->
-      //   console.log x,y,z
-        
-//   showVitae = (href) ->
-//     $.ajax
-//       url: href
-//       type: 'GET'
-//       data: 'json'
-//       success: (data) ->
-//         source = $("#vitae-template").html()
-//         template = Handlebars.compile source
-        
-//         $('#page-content').html template(data)
-//       error: (x,y,z) ->
-//         console.log x,y,z
-        
-//   $('#page-content').on 'click', 'ul.profile-link li a', (e) ->
-//     e.preventDefault()
-//     showVitae $(@).attr('href')
-  
-//   $('#page-content').on 'click', 'p.vitaes-path a', (e) ->
-//     e.preventDefault()
-//     showVitaes()
-        
-//   showVitaes()
+$(function() {
+  $('#edit_image').hide();
+  $('#show_edit_image_form').hide();
+
+  function show_edit_link() {
+    $('#edit_image').show()
+  }
+
+  function hide_edit_link() {
+    $('#edit_image').hide()
+  }
+
+  $('#editable_profile_picture').on('mouseover', show_edit_link).on('mouseout', hide_edit_link);
+
+  $('#edit_image').on('click', function() {
+    $('#edit_image').hide();
+    $('#show_edit_image_form').show();
+    $('#editable_profile_picture').off('mouseover', show_edit_link).off('mouseout', hide_edit_link);
+  });
+
+  $('#cancel_edit_image').on('click', function(e) { 
+    $('#show_edit_image_form').hide();
+    $('#editable_profile_picture').on('mouseover', show_edit_link).on('mouseout', hide_edit_link);
+    e.preventDefault();
+  });
+
+});
 </script>

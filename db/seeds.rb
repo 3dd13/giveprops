@@ -31,17 +31,20 @@ professions = Profession.create([{
 	}])
 
 props = Prop.create([{
-		rating: '5',
+		rating: 5,
 		profession: professions[0],
-		user: user
+		user: user,
+    rated_by_user: user
 	},
 	{
-		rating: '0',
+		rating: 0,
 		profession: professions[1],
-		user: user
+		user: user,
+    rated_by_user: user
 	},
 	{
-	  rating: '1',
+	  rating: 1,
 		profession: professions[0],
-		user: user
+		user: user,
+    rated_by_user: user
 	}])
