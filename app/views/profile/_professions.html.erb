@@ -1,0 +1,94 @@
+<li>
+	<%= prop.profession.title %>: <%= prop.total.round(1) %>
+	(<%= prop.count %> vote<% if prop.count>1 %>s<% end %>)
+	<% if @user_profile != current_user %>
+		<a id="rate-profession" class="float-right">Rate</a>
+	<% end %>
+<div class="star"></div><button id='send-rating'>Rate!</button></li>
+
+<script>
+	$(function() {
+		$('#send-rating').hide();
+
+	  $('.star').raty({
+	  	readOnly: true,
+	    path: '/assets',
+	    half: true,
+	    halfShow:  true,
+	    score: (<%= prop.total %>)
+	  });
+
+	  <% if user_signed_in? %> 
+		  $('#rate-profession').on('click', function() {
+		  	var rateProfessionText = $('#rate-profession').text();
+		  	switch(rateProfessionText) {
+		  		case 'Rate':
+		  			$('#rate-profession').text('Cancel');
+		  			$('#send-rating').show();
+		  			$('.star').raty({
+					    path: '/assets',
+					    cancel: true,
+					    cancelPlace: 'right',
+					    <% if @current_user_ratings_for_this_user %>
+					    	<% @current_user_ratings_for_this_user.each do |u| %>
+									<% if u.profession_id == prop.profession_id %>
+										score: <%= u.rating %>
+									<% end %>
+								<% end %>
+							<% end %>
+					  });
+		  			break;
+		  		default:
+		  			$('#rate-profession').text('Rate');
+		  			$('#send-rating').hide();
+		  			$('.star').raty({
+					  	readOnly: true,
+					    path: '/assets',
+					    half: true,
+					    halfShow:  true,
+					    score: (<%= prop.total %>)
+					  });
+		  	};
+		  });
+	  <% end %>
+
+	  $('#send-rating').on('click', function(e) {
+	  	e.preventDefault();
+	  	var score = $('.star').raty('score');
+	  	var flag = false;
+	  	<% if user_signed_in? %> 
+		  	<% if @current_user_ratings_for_this_user %>
+		    	<% @current_user_ratings_for_this_user.each do |u| %>
+						<% if u.profession_id == prop.profession_id %>
+							flag = true;
+							$.ajax({
+				        url: '/api/props/' + <%= u.id %>,
+				        type: 'PUT',
+				        data: { rating: score}
+				      });
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+			if (flag == false) {
+				$.ajax({
+	        url: '/api/props',
+	        type: 'POST',
+	        data: { rating: score, user_id: <%= @user_profile.id %>, profession_id: <%= prop.profession.id %>, rated_by_user_id: <%= current_user.id %>}
+	      });
+			};
+			
+	 
+	  	$('#rate-profession').text('Rate');
+			$('#send-rating').hide();
+			$('.star').raty({
+		  	readOnly: true,
+		    half: true,
+		    halfShow:  true,
+		    path: '/assets',
+		    score: (<%= prop.total %>)
+		  });
+	  });
+
+	});
+</script>

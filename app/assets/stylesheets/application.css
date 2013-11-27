@@ -59,7 +59,7 @@ color: #4B0082;
   padding: 0 0 60px;
 }
 
-#register-btn {
+#register-btn, #facebook-btn {
 	margin-bottom: 20px;
 	background-color: #4B0082;
 	color: white;
@@ -77,19 +77,58 @@ color: #4B0082;
   border-radius: 10px;
   box-sizing: border-box;
   float: left;
-  vertical-align: middle;
 }
 
 #show_edit_image_form {
   height: 95px;
 }
 
+.user-details {
+
+}
 .user-details:hover {
   text-decoration: none;
 }
 
-#register-form {
+#register-form, #facebook-form {
   margin-bottom: 50px;
+}
+
+#editable_profile_picture {
+  overflow: hidden;
+}
+
+#profile_picture_div {
+  overflow: hidden;
+}
+
+#cancel_edit_image {
+  float: right;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
+.profile-picture-btn {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+#rate-profession {
+  cursor: pointer;
 }
 
 /*

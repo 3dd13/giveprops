@@ -4,4 +4,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	def get_cities
 		@cities = City.all
 	end
+
 end

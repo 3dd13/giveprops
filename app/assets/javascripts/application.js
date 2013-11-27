@@ -15,6 +15,7 @@
 //= require ./vendor/bootstrap
 //= require ./vendor/handlebars
 //= require ./vendor/jquery.noty
+//= require ./vendor/jquery.raty
 //= require ./vendor/themes/default
 //= require ./vendor/layouts/top
 //= require ./vendor/layouts/topRight

@@ -1,11 +1,13 @@
 <div class="row">
   <div class="col-sm-3">
     <div id="editable_profile_picture">
+      <div id="profile_picture_div">
         <% if @user_profile.avatar.thumb.url %>
           <%= image_tag @user_profile.avatar.thumb.url, width: '100%', id:'profile_picture' %>
         <% else %>
           <%= image_tag 'person.jpg', width: '100%', id:'profile_picture' %>
         <% end %>
+      </div>
       <% if @user_profile == current_user %>
         <div id="edit_image">
           <a>Edit Profile Picture</a>
@@ -14,9 +16,11 @@
           <%= form_for :user, url: profile_url, html: { role: "form", id:"edit_image_form" }, method: :put do |f| %>
             <div class="form-group">
               <%= f.file_field :avatar %>
-              <div class="col-lg-8 no-padding-left no-padding-right">
-                <%= f.submit 'Save Image', class:'btn btn-default', name:'save_avatar' %>
-                <%= f.submit 'Delete Image', class:'btn btn-default', name:'delete_avatar' %>
+              <div class="col-lg-4 no-padding-left no-padding-right">
+                <%= f.submit 'Save Image', class:'btn btn-default profile-picture-btn', name:'save_avatar' %>
+              </div>
+              <div class="col-lg-4 no-padding-left no-padding-right">
+                <%= f.submit 'Delete Image', class:'btn btn-default profile-picture-btn', name:'delete_avatar' %>
               </div>
               <div class="col-lg-4 no-padding-right no-padding-left">
                 <button class="btn btn-default" id="cancel_edit_image">Cancel</button>
@@ -27,10 +31,10 @@
       <% end %>
     </div>
     <div class="bs-sidebar hidden-print" role="complementary">
-      <div class="bs-sidenav users-link">
+      <!-- <div class="bs-sidenav users-link">
         <section id="page-content"></section>
         <section id="professions-content"></section>
-      </div>
+      </div> -->
       <div class="bs-sidenav users-link">
         <ul class="nav">
           <li><%= @user_profile.name =%></li>
@@ -38,9 +42,10 @@
         </ul>
         <ul class="nav">
           <% @props.each do |prop| %>
-          <li><%= prop.profession.title %>: <%= prop.total %> (<%= prop.count %> vote<% if prop.count>1 %>s<% end %>)</li>
+            <%= render partial: 'professions', :locals => {:prop => prop} %>
           <% end %>
         </ul>
+        
         <script>
           $(function() {
             // getUserProfile(<%= @user_profile.id %>);

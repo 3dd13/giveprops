@@ -1,12 +1,13 @@
 Giveprops::Application.routes.draw do
 
-  devise_for :users, controllers: { confirmations: 'confirmations', registrations: "users/registrations" }
+  devise_for :users, controllers: { confirmations: 'confirmations', registrations: "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   # devise_for :users
   # devise_for :users, :skip => [:sessions]
 
   as :user do
   	get '/register', to: 'devise/registrations#new', as: :register
   	get "/login" => 'devise/sessions#new'
+    get "/login" => 'users/sessions#new'
     post '/login' => 'devise/sessions#create'
     get '/logout', to: 'devise/sessions#destroy', as: :logout
     get '/confirm' => 'devise/confirmations#show', as: :confirm

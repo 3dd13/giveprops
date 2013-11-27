@@ -42,7 +42,7 @@
 		          <%= image_tag 'person.jpg', width: '100%', id:'profile_picture' %>
 		        <% end %>
 						<%= p.user.name %>
-						<%= p.total %>
+						<%= p.total.round(1) %>
 					</a>
 				</div>
 			<% end %>

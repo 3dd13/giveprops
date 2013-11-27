@@ -4,53 +4,85 @@
   	<h1>Give Props.</h1>
   </div>
   <div class="jumbotron jumbo-white">
-  	<% unless current_user %>
-	  	<button class="btn btn-lg" id="register-btn">Register Now</button>
-	  	<div id="register-form">
-		  	<%= form_for("user", :url => user_registration_path) do |f| %>	
-			  	<div class="form-group">
-				  	<div class="row">
-				  		<div class="col-sm-3 col-sm-offset-3">
-							  <div><%= f.label :email %><br />
-							  <%= f.email_field :email, :autofocus => true, :class => "form-control" %></div>
 
-							  <div><%= f.label :password %><br />
-							  <%= f.password_field :password, :class => "form-control" %></div>
+	  	<% unless current_user %>
+	  	 	<div class="row">
+  		<div class="col-sm-6">
+		  	<button class="btn btn-lg float-right" id="register-btn">Register Now</button>
+		  </div>
+		  <div class="col-sm-6">
+		  	<button class="btn btn-lg float-left" id="facebook-btn">Sign up with Facebook</button>
+		  </div>
+		</div>
+		  <div class="row">
+		  	<div id="register-form">
+			  	<%= form_for("user", :url => user_registration_path) do |f| %>	
+				  	<div class="form-group">
+					  	<div class="row">
+					  		<div class="col-sm-3 col-sm-offset-3">
+								  <div><%= f.label :email %><br />
+								  <%= f.email_field :email, :autofocus => true, :class => "form-control" %></div>
 
-							  <div><%= f.label :password_confirmation %><br />
-							  <%= f.password_field :password_confirmation, :class => "form-control" %></div>
-							</div>
-							<div class="col-sm-3">
-							  <div><%= f.label :name %><br />
-							  <%= f.text_field :name, :class => "form-control" %></div>
+								  <div><%= f.label :password %><br />
+								  <%= f.password_field :password, :class => "form-control" %></div>
 
-							  <div><%= f.label :profile_name %><br />
-							  <%= f.text_field :profile_name, :class => "form-control" %></div>
+								  <div><%= f.label :password_confirmation %><br />
+								  <%= f.password_field :password_confirmation, :class => "form-control" %></div>
+								</div>
+								<div class="col-sm-3">
+								  <div><%= f.label :name %><br />
+								  <%= f.text_field :name, :class => "form-control" %></div>
 
-							  <div><%= f.label :city %><br />
-							  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>false }, { :class => 'form-control' } %></div>
+								  <div><%= f.label :profile_name %><br />
+								  <%= f.text_field :profile_name, :class => "form-control" %></div>
+
+								  <div><%= f.label :city %><br />
+								  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>false }, { :class => 'form-control' } %></div>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div><%= f.submit "Sign up", :class => "btn btn-lg btn-success" %></div>
-					</div>
-				<% end %>
+						<div class="row">
+							<div><%= f.submit "Sign up", :class => "btn btn-lg btn-success", name:'facebook-signup' %></div>
+						</div>
+					<% end %>
+				</div>
+				<div id="facebook-form">
+			  	<%= form_for("user", :url => user_registration_path) do |f| %>	
+				  	<div class="form-group">
+					  	<div class="row">
+					  		<div class="col-sm-3 col-sm-offset-3">
+								  <div><%= f.label :profile_name %><br />
+								  <%= f.text_field :profile_name, :class => "form-control" %></div>
+								</div>
+								<div class="col-sm-3">
+								  <div><%= f.label :city %><br />
+								  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>false }, { :class => 'form-control' } %></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div><%= f.submit "Sign up", :class => "btn btn-lg btn-success" %></div>
+						</div>
+					<% end %>
+				</div>
 			</div>
 
-  	<p>or <% end %>search our lists:</p>
-  	<%= form_tag search_index_path, method: :get, :class => 'form-inline' do %>	
-	  <div class="form-group">
-	  	<label>Choose a Profession...</label>
-	  	<%= select_tag 'profession', options_from_collection_for_select(@professions, 'id', 'title'), { :class => 'form-control' } %>
-	  </div>
-	  <div class="form-group">
-	  	<label>Choose a Location...</label>
-	  	<%= select_tag 'city', options_from_collection_for_select(@cities, 'id', 'name'), { include_blank: true,  :class => 'form-control'} %>
-	  </div>
-	  <div class="form-group">
-		  <%= submit_tag "Search" %>
+<div class="row">
+	  	<p>or <% end %>search our lists:</p>
+	  	<%= form_tag search_index_path, method: :get, :class => 'form-inline' do %>	
+		  <div class="form-group">
+		  	<label>Choose a Profession...</label>
+		  	<%= select_tag 'profession', options_from_collection_for_select(@professions, 'id', 'title'), { :class => 'form-control' } %>
+		  </div>
+		  <div class="form-group">
+		  	<label>Choose a Location...</label>
+		  	<%= select_tag 'city', options_from_collection_for_select(@cities, 'id', 'name'), { include_blank: true,  :class => 'form-control'} %>
+		  </div>
+		  <div class="form-group">
+			  <%= submit_tag "Search" %>
+			</div>
+			</div>
+		  <% end %>
 		</div>
-	<% end %>
-  </div>
+	</div>
 </div>

@@ -1,8 +1,15 @@
+require 'freebase_client'
+
 namespace :freebase do
   desc "Download people data from Freebase"
   task :download => :environment do
-    puts "do something"
-    
-    # User.create(email: "sample.com", password: "1234qwer")
+		FreebaseClient.all_cities.each do |uk|
+    	uk["/location/location/contains"].each do |city|
+    		City.create(name: city["name"])
+    	end
+    end
+    FreebaseClient.all_professions.each do |p|
+    	Profession.create(title: p["name"])
+    end
   end
 end

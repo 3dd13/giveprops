@@ -20,7 +20,7 @@ class PropsController < ApplicationController
 
   def create
     if @user = User.find_by_id( params[:user_id] )
-      @prop = @user.props.create(prop_params)
+      @prop = @user.props.create(rating: params[:rating], user_id: params[:user_id], profession_id: params[:profession_id], rated_by_user_id: params[:rated_by_user_id])
     elsif @profession = Profession.find_by_id( params[:profession_id] )
       @props = @profession.props.create(prop_params)
     else
@@ -35,7 +35,9 @@ class PropsController < ApplicationController
   end
 
   def update
-    if @prop.update(prop_params)
+    if @prop.update_attributes(rating: params[:rating])
+      head :no_content
+    elsif @prop.update(prop_params)
       head :no_content
     else
       render 'errors', status: :unprocessable_entity
@@ -60,7 +62,7 @@ class PropsController < ApplicationController
 
   def prop_params
     params.require(:prop).permit( 
-      :rating, :user_id, :profession_id
+      :rating, :user_id, :profession_id, :rated_by_user_id
     )
   end
 end

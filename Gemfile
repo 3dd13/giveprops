@@ -42,6 +42,11 @@ gem 'devise'
 gem 'pg'
 gem 'carrierwave'
 gem 'mini_magick', :git => 'git://github.com/probablycorey/mini_magick.git'
+gem 'gon'
+gem 'httparty'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'freebase-api'
 
 group :development, :test do
 	gem 'rspec-rails'

@@ -29,6 +29,7 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Search", search_path %></li>
+          <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
         </ul>
       <% end %>
     </div><!--/.navbar-collapse -->

@@ -5,4 +5,10 @@
 $ ->
   $("#register-form").hide()
   $("#register-btn").click ->
+    $("#facebook-form").hide()
     $("#register-form").toggle()
+
+  $("#facebook-form").hide()
+  $("#facebook-btn").click ->
+    $("#register-form").hide()
+    $("#facebook-form").toggle()
