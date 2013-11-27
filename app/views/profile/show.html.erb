@@ -38,7 +38,11 @@
       <div class="bs-sidenav users-link">
         <ul class="nav">
           <li><%= @user_profile.name =%></li>
-          <li><%= @user_profile.city.name %>, <%= @user_profile.city.country.name %></li>
+          <li>
+            <% if @user_profile.city %>
+              <%= @user_profile.city.name %>, <%= @user_profile.city.country.name %>
+            <% else %>UK<% end %>
+          </li>
         </ul>
         <ul class="nav">
           <% @props.each do |prop| %>

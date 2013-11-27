@@ -12,9 +12,8 @@ class User < ActiveRecord::Base
 
 	mount_uploader :avatar, AvatarUploader
 
-	# validates :profile_name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2 }
-	# validates :name, presence: true, length: { minimum: 2 }
-	# validates :city, presence: true
+	validates :profile_name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 2 }
+	validates :name, presence: true, length: { minimum: 2 }
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -23,7 +22,8 @@ class User < ActiveRecord::Base
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
-                           password:Devise.friendly_token[0,20]
+                           password:Devise.friendly_token[0,20],
+                           profile_name: SecureRandom.urlsafe_base64
                            )
       user.skip_confirmation!
       user.save

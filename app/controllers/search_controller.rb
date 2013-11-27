@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
 
   def index
-  	@professions = Profession.all
-  	@cities = City.all
+  	@professions = Profession.all.order("title")
+  	@cities = City.all.order("name")
   	if params[:profession]
   		@profession = Profession.find_by(id: params[:profession])
   		@city = City.find_by(id: params[:city])

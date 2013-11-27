@@ -4,7 +4,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # helper DeviseHelper
   before_filter :update_sanitized_params, if: :devise_controller?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:name, :profile_name, :gender, :city_id )
+    end
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:name, :profile_name, :gender, :city_id, :current_password, :email, :password, :password_confirmation)
+    end
+  end
 
   private 
 
@@ -18,9 +29,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
-    # if !current_user.profile_name
-    #   redirect_to edit_user_path(current_user)
-    # end
     if request.referer == sign_in_url
       super
     else
