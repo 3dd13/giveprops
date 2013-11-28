@@ -20,7 +20,7 @@
   <%= f.text_field :profile_name %></div>
 
   <div><%= f.label :city %><br />
-  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name') %></div>
+  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>true }  %></div>
 				  
   <div><%= f.submit "Sign up" %></div>
 <% end %>

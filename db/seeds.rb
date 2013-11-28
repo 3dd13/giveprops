@@ -7,44 +7,44 @@ country = Country.create({
 	name: "UK"
 })
 
-city = City.create({
-  name: "London",
-  country: country
-})
+# city = City.create({
+#   name: "London",
+#   country: country
+# })
 
-user = User.create!({
-  name: "Emily",
-  city: city,
-  gender: "f",
-  email: 'em@ea.com',
-  password: '12345678',
-  profile_name: 'emily',
-  confirmed_at: Time.now
+# user = User.create!({
+#   name: "Emily",
+#   city: city,
+#   gender: "f",
+#   email: 'em@ea.com',
+#   password: '12345678',
+#   profile_name: 'emily',
+#   confirmed_at: Time.now
 
-  })
+#   })
 
-professions = Profession.create([{
-		title: "web developer"
-	},
-	{
-		title: 'Actor'
-	}])
+# professions = Profession.create([{
+# 		title: "web developer"
+# 	},
+# 	{
+# 		title: 'Actor'
+# 	}])
 
-props = Prop.create([{
-		rating: 5,
-		profession: professions[0],
-		user: user,
-    rated_by_user: user
-	},
-	{
-		rating: 0,
-		profession: professions[1],
-		user: user,
-    rated_by_user: user
-	},
-	{
-	  rating: 1,
-		profession: professions[0],
-		user: user,
-    rated_by_user: user
-	}])
+# props = Prop.create([{
+# 		rating: 5,
+# 		profession: professions[0],
+# 		user: user,
+#     rated_by_user: user
+# 	},
+# 	{
+# 		rating: 0,
+# 		profession: professions[1],
+# 		user: user,
+#     rated_by_user: user
+# 	},
+# 	{
+# 	  rating: 1,
+# 		profession: professions[0],
+# 		user: user,
+#     rated_by_user: user
+# 	}])

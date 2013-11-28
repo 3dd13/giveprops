@@ -10,7 +10,7 @@ class FreebaseClient
   		# :corresponding_type => [],
   		# :specialization_of => [],
   		# :specializations => [],
-    	:limit => 1500
+    	:limit => 1000
 		}])
 	end
 
@@ -29,7 +29,7 @@ class FreebaseClient
       		:return => "count"
     		},
     		:sort => "-/location/location/contains.count",
-    		:limit => 1500
+    		:limit => 1000
   		}]
 		}])
 	end

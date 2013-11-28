@@ -19,4 +19,7 @@
 //= require ./vendor/themes/default
 //= require ./vendor/layouts/top
 //= require ./vendor/layouts/topRight
+//= require ./vendor/underscore
+//= require ./vendor/eventable
+//= require ./vendor/sir-trevor
 //= require_tree .

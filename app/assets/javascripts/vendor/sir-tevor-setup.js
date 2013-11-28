@@ -1,0 +1,3 @@
+SirTrevor.setDefaults({
+  uploadUrl: "/images"
+});

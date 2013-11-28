@@ -1,5 +1,5 @@
 class PropsController < ApplicationController
-  before_action :get_prop, except: [ :index, :create ]
+  before_action :get_prop, except: [ :index, :create, :update ]
   # before_action :set_csrf_token_header, only: [ :index, :show ]
   
   respond_to :json
@@ -24,24 +24,29 @@ class PropsController < ApplicationController
     elsif @profession = Profession.find_by_id( params[:profession_id] )
       @props = @profession.props.create(prop_params)
     else
-      @prop = Prop.create(prop_params)
+      @prop = Prop.create(rating: params[:rating], user_id: params[:user], profession_id: params[:profession], rated_by_user_id: params[:rated_by_user])
     end
 
     if @prop.save
       head :created, location: prop_url(@prop)
+      redirect_to profile_path(@prop.user_id)
     else
       render 'errors', status: :unprocessable_entity
     end
   end
 
   def update
-    if @prop.update_attributes(rating: params[:rating])
-      head :no_content
-    elsif @prop.update(prop_params)
-      head :no_content
-    else
-      render 'errors', status: :unprocessable_entity
-    end
+    # if @prop.update_attributes(rating: params[:rating])
+    #   head :no_content
+    #   # redirect_to profile_path(@prop.user_id)
+    # elsif @prop.update(prop_params)
+    #   head :no_content
+    # else
+    #   render 'errors', status: :unprocessable_entity
+    # end
+    @prop = Prop.find_by_id(params[:id])
+    @prop.update_attributes(rating: params[:rating])
+    head :no_content
   end
 
   def destroy

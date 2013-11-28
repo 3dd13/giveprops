@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
 
   belongs_to :city
   has_many :props, dependent: :destroy
-	has_many :professions, through: :props
+	has_many :professions
+  has_many :images
 
 	mount_uploader :avatar, AvatarUploader
 

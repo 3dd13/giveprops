@@ -38,6 +38,7 @@ Giveprops::Application.routes.draw do
 end
 
   get '/search', to: 'search#index', as: :search
+  resources :images, only: [:create]
   
   get '/:profile_name' => 'profile#show', as: :profile
   put '/:profile_name' => 'profile#update'

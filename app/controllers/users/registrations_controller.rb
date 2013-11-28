@@ -5,8 +5,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
 		@cities = City.all
 	end
 
+	def edit
+		@professions = Profession.all.order("title")
+		@user_profession = UserProfessions.where(user: current_user).select("profession_id").first
+		if @user_profession
+			@profession = @user_profession.profession
+		end
+	end
+
 	def update
     @user = User.find(current_user.id)
+
+    if params[:profession].blank?
+    	if UserProfessions.where(user: @user).exists?
+    		u = UserProfessions.where(user: @user).first
+    		u.destroy
+    	end
+    else	
+    	if UserProfessions.where(user: @user).exists?
+    		u = UserProfessions.where(user: @user).first
+    	else
+	    	u = UserProfessions.new
+	    	u.user = @user
+	    	
+      end
+    	u.profession_id = params[:profession]
+    	u.save
+    end
 
     successfully_updated = if needs_password?(@user, params)
       @user.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))

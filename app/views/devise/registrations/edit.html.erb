@@ -10,15 +10,19 @@
   <%= f.text_field :profile_name %></div>
 
   <div><%= f.label :city %><br />
-  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>false } %></div>
+  <%= f.select :city_id, options_from_collection_for_select(@cities, 'id', 'name'), { :include_blank=>true } %></div>
+
+  <div><%= f.label :profession %><br />
+  <%= select_tag :profession, options_from_collection_for_select(@professions, 'id', 'title'), { :include_blank=>true, :prompt=>(@profession.title if @profession) } %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+
   <% if !current_user.provider %>
     <div><%= f.label :email %><br />
     <%= f.email_field :email, :autofocus => true %></div>
-    
+
     <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, :autocomplete => "off" %></div>
 

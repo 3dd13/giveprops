@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126080606) do
+ActiveRecord::Schema.define(version: 20131128062125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 20131126080606) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "images", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "portfolio_image"
+  end
+
+  add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
 
   create_table "professions", force: true do |t|
     t.string   "title"
@@ -50,6 +59,16 @@ ActiveRecord::Schema.define(version: 20131126080606) do
   add_index "props", ["profession_id"], name: "index_props_on_profession_id", using: :btree
   add_index "props", ["rated_by_user_id"], name: "index_props_on_rated_by_user_id", using: :btree
   add_index "props", ["user_id"], name: "index_props_on_user_id", using: :btree
+
+  create_table "user_professions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "profession_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_professions", ["profession_id"], name: "index_user_professions_on_profession_id", using: :btree
+  add_index "user_professions", ["user_id"], name: "index_user_professions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

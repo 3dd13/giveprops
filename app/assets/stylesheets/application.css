@@ -10,6 +10,8 @@
  *
  *= require bootstrap
  *= require bootstrap-theme
+ *= require sir-trevor
+ *= require sir-trevor-icons
  *= require_self
  */
 
@@ -130,6 +132,10 @@ color: #4B0082;
 #rate-profession {
   cursor: pointer;
 }
+
+/*#cancel_edit_image {
+  float: right;
+}*/
 
 /*
  * Side navigation

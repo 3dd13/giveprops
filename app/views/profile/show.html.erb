@@ -45,11 +45,8 @@
           </li>
         </ul>
         <ul class="nav">
-          <% @props.each do |prop| %>
-            <%= render partial: 'professions', :locals => {:prop => prop} %>
-          <% end %>
+          <%= render partial: 'professions' %>
         </ul>
-        
         <script>
           $(function() {
             // getUserProfile(<%= @user_profile.id %>);
@@ -58,10 +55,26 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-9">
+    <% if @user_profile == current_user %>
+      <div style="float: right">
+      <h3>Add an image</h3>
+      <%= form_for :images, url: profile_url, html: { role: "form", id:"edit_image_form" }, method: :put do |f| %>
+        <div class="form-group">
+          <%= f.file_field :portfolio_image %>
+          <%= f.submit 'Save Image', class:'btn btn-default', name:'save_portfolio_image'  %>
+          <button class="btn btn-default" id="cancel_edit_image">Cancel</button>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+    <% if @images %>
+      <% @images.each do |i| %>
+        <%= image_tag i.portfolio_image.url, width: '275em', class:'portfolio-image' %>
+      <% end %>
+    <% end %>
   </div>
 </div>
-
 
 <script id="users-template" type="text/x-handlebars-template">
   <ul class="nav users-link">
@@ -106,6 +119,9 @@ $(function() {
     $('#editable_profile_picture').on('mouseover', show_edit_link).on('mouseout', hide_edit_link);
     e.preventDefault();
   });
+
+  
+
 
 });
 </script>

@@ -47,6 +47,7 @@ gem 'httparty'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'freebase-api'
+gem 'sir-trevor-rails'
 
 group :development, :test do
 	gem 'rspec-rails'
